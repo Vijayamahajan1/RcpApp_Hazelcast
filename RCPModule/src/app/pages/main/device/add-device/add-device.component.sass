@@ -1,0 +1,60 @@
+.device-form-container
+  padding: 20px
+  max-width: 500px
+  margin: 50px auto
+  background-color: #f9f9f9
+  border: 1px solid #ddd
+  border-radius: 8px
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+
+  h2
+    margin-bottom: 20px
+    text-align: center
+    color: #212529
+
+  form
+    display: flex
+    flex-direction: column
+
+    label
+      margin-top: 10px
+      font-weight: bold
+      color: #333
+
+    input
+      padding: 10px
+      margin-top: 5px
+      border: 1px solid #ccc
+      border-radius: 4px
+      font-size: 14px
+      height: 20px
+
+      &:focus
+        outline: none
+        border-color: #007bff
+
+  .btn-group
+    margin-top: 20px
+    display: flex
+    justify-content: space-between
+
+    button
+      padding: 10px 15px
+      cursor: pointer
+      border: none
+      border-radius: 4px
+      font-size: 14px
+
+      &:first-child
+        background-color: #007bff
+        color: white
+
+        &:hover
+          background-color: #0056b3
+
+      &:last-child
+        background-color: #6c757d
+        color: white
+
+        &:hover
+          background-color: #5a6268

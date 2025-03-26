@@ -1,0 +1,63 @@
+<div class="acquirer-container">
+    <div class="header">
+      <h2>Acquirers</h2>
+      <button class="add-btn" (click)="openAddPage()">➕ Add Acquirer</button>
+    </div>
+  
+    <!-- Table -->
+    <table class="acquirer-table">
+      <thead>
+        <tr>
+          <th>Acquirer Name</th>
+          <th>Acquirer Code</th>
+          <th>Country</th>
+          <th>Currency</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let acquirer of acquirers">
+          <!-- Acquirer Name -->
+          <td *ngIf="selectedAcquirerId === acquirer.cacheId">
+            <input [(ngModel)]="acquirer.acquirerName" class="form-control" />
+          </td>
+          <td *ngIf="selectedAcquirerId !== acquirer.cacheId">{{ acquirer.acquirerName }}</td>
+  
+          <!-- Acquirer Code -->
+          <td *ngIf="selectedAcquirerId === acquirer.cacheId">
+            <input [(ngModel)]="acquirer.code" class="form-control" />
+          </td>
+          <td *ngIf="selectedAcquirerId !== acquirer.cacheId">{{ acquirer.code }}</td>
+  
+          <!-- Country -->
+          <td *ngIf="selectedAcquirerId === acquirer.cacheId">
+            <input [(ngModel)]="acquirer.country" class="form-control" />
+          </td>
+          <td *ngIf="selectedAcquirerId !== acquirer.cacheId">{{ acquirer.country }}</td>
+  
+          <!-- Currency -->
+          <td *ngIf="selectedAcquirerId === acquirer.cacheId">
+            <input [(ngModel)]="acquirer.currency" class="form-control" />
+          </td>
+          <td *ngIf="selectedAcquirerId !== acquirer.cacheId">{{ acquirer.currency }}</td>
+  
+          <td>
+            <div *ngIf="selectedAcquirerId === acquirer.cacheId">
+              <button (click)="updateAcquirer(acquirer)">Save</button>
+              <button (click)="cancelEdit()">Cancel</button>
+            </div>
+  
+            <div *ngIf="selectedAcquirerId !== acquirer.cacheId">
+              <button (click)="selectAcquirer(acquirer.cacheId)">Edit</button>
+              <button (click)="deleteAcquirer(acquirer.cacheId)">Delete</button>
+            </div>
+          </td>
+        </tr>
+  
+        <tr *ngIf="acquirers.length === 0">
+          <td colspan="5" style="height: 100px; text-align: center;">No data available</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

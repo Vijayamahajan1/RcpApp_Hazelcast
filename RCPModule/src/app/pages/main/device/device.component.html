@@ -1,0 +1,76 @@
+<div class="device-container">
+    <div class="header">
+      <h2>Devices</h2>
+      <button class="add-btn" (click)="openAddPage()">➕ Add Device</button>
+    </div>
+  
+    <!-- Table -->
+    <table class="device-table">
+      <thead>
+        <tr>
+          <th>Terminal ID</th>
+          <th>Merchant ID</th>
+          <th>Device Type</th>
+          <th>Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Show rows if data is available -->
+        <tr *ngFor="let device of devices">
+          <!-- Terminal ID -->
+          <td *ngIf="selectedDeviceId === device.cacheId">
+            <input [(ngModel)]="device.terminalId" class="form-control" />
+          </td>
+          <td *ngIf="selectedDeviceId !== device.cacheId">
+            {{ device.terminalId }}
+          </td>
+  
+          <!-- Merchant ID -->
+          <td *ngIf="selectedDeviceId === device.cacheId">
+            <input [(ngModel)]="device.merchantId" class="form-control" />
+          </td>
+          <td *ngIf="selectedDeviceId !== device.cacheId">
+            {{ device.merchantId }}
+          </td>
+  
+          <!-- Device Type -->
+          <td *ngIf="selectedDeviceId === device.cacheId">
+            <input [(ngModel)]="device.deviceType" class="form-control" />
+          </td>
+          <td *ngIf="selectedDeviceId !== device.cacheId">
+            {{ device.deviceType }}
+          </td>
+  
+          <!-- Location -->
+          <td *ngIf="selectedDeviceId === device.cacheId">
+            <input [(ngModel)]="device.location" class="form-control" />
+          </td>
+          <td *ngIf="selectedDeviceId !== device.cacheId">
+            {{ device.location }}
+          </td>
+  
+          <!-- Actions -->
+          <td>
+            <!-- Edit Mode -->
+            <div *ngIf="selectedDeviceId === device.cacheId">
+              <button (click)="updateDevice(device)">Save</button>
+              <button (click)="cancelEdit()">Cancel</button>
+            </div>
+  
+            <!-- View Mode -->
+            <div *ngIf="selectedDeviceId !== device.cacheId">
+              <button (click)="selectDevice(device.cacheId)">Edit</button>
+              <button (click)="deleteDevice(device.cacheId)">Delete</button>
+            </div>
+          </td>
+        </tr>
+  
+        <!-- Show an empty row if no data -->
+        <tr *ngIf="devices.length === 0">
+          <td colspan="5" style="height: 100px; text-align: center;">No data available</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

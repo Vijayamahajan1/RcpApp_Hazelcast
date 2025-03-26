@@ -1,0 +1,22 @@
+<div class="device-form-container">
+    <h2>{{ deviceId ? 'Edit Device' : 'Add New Device' }}</h2>
+    <form (submit)="saveDevice()">
+      <label>Terminal ID:</label>
+      <input type="text" [(ngModel)]="deviceForm.terminalId" name="terminalId" required />
+  
+      <label>Merchant ID:</label>
+      <input type="text" [(ngModel)]="deviceForm.merchantId" name="merchantId" required />
+  
+      <label>Device Type:</label>
+      <input type="text" [(ngModel)]="deviceForm.deviceType" name="deviceType" required />
+  
+      <label>Location:</label>
+      <input type="text" [(ngModel)]="deviceForm.location" name="location" required />
+  
+      <div class="btn-group">
+        <button type="submit">{{ deviceId ? 'Update' : 'Save' }}</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+  

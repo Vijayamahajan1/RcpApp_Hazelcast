@@ -1,0 +1,41 @@
+// Variables
+$primary-color: #007bff
+$border-color: #ccc
+$header-bg: #f1f1f1
+$text-color: white
+$padding: 20px
+$btn-radius: 4px
+
+.acquirer-container
+  padding: $padding
+
+  .header
+    display: flex
+    justify-content: space-between
+    margin-bottom: 20px
+
+    h2
+      margin: 0
+
+    .add-btn
+      background-color: $primary-color
+      color: $text-color
+      padding: 8px 12px
+      border: none
+      cursor: pointer
+      border-radius: $btn-radius
+
+  .acquirer-table
+    width: 100%
+    border-collapse: collapse
+
+    th, td
+      padding: 10px
+      border: 1px solid $border-color
+
+    th
+      background-color: $header-bg
+
+    a
+      color: $primary-color
+      cursor: pointer
