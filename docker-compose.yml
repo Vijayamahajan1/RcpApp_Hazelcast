@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: rcpdb
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+    networks:                      
+      - hz-network
+
+  hazelcast-server:
+    image: hazelcast-server
+    container_name: hz-server
+    build:                           
+      context: ./HazelcastSever
+    ports:
+      - "8080:8080"      
+      - "5701:5701" 
+    networks:
+      - hz-network
+    environment:
+      - HZ_CLUSTERNAME=dev
+
+  rcp-app:
+    image: rcp-app
+    container_name: rcp-app
+    build:                           
+      context: ./rcpApp
+    ports:
+      - "8081:8081"
+    depends_on:
+      - hazelcast-server
+      - postgres-db
+    networks:
+      - hz-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/rcpdb
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=root
+      - HAZELCAST_CLUSTER_NAME=dev
+      - HAZELCAST_SERVER=hz-server:5701
+
+  angular-frontend:
+    image: angular-frontend
+    container_name: angular-frontend
+    build:
+      context: ./RCPModule
+    ports:
+      - "3000:80" 
+    networks:
+      - hz-network
+    depends_on:
+      - rcp-app
+
+networks:
+  hz-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
